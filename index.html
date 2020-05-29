@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Bank Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body id="main_body">
+  <script src="script.js"></script>
+
+  <h2 class="header2">WELCOME</h2>
+  <h4 class="header4">Enter Bank Details:</h4>
+
+  <div id="form">
+    <span id="bank_id">
+      <span class="simple_text">Bank_id:</span>
+      <select id="Bank_id_in_form">
+        <option value="None">None</option>
+        <option value="Amex">American Express</option>
+        <option value="Hdfc">HDFC</option>
+        <option value="Sbi">State Bank Of India</option>
+        <option value="Axis">Axis Bank</option>
+      </select>
+    </span>
+
+    <span id="marketplace_id">
+      <span class="simple_text">Marketplcae_id:</span>
+      <input type="text" id="Marketplace_id_in_form" value="" />
+    </span>
+    <span id="payment_method">
+      <span class="simple_text">Payment_method:</span>
+      <select id="Payment_method_in_form">
+        <option value="NONE">None</option>
+        <option value="CC">Credit Card</option>
+        <option value="DC">Debit Card</option>
+        <option value="UPI">UPI</option>
+      </select>
+    </span>
+
+    <span id="rangekey">
+      <span class="simple_text">Range_Key(Optional):</span>
+      <input type="text" id="Range_key_in_form" value="" />
+    </span>
+    <div id="wrapper_around_search_button_in_form">
+      <button type="submit" id="Search_button" onclick=" Clicking_search_button(); return false ">
+        Search
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <p id="showAnything"></p>
+  </div>
+
+  <div id="area_for_showing_error_message" style="display: none;">
+    <p id="error"></p>
+  </div>
+
+  <div id="wrapper_around_table" style="display: none;">
+    <h2>Bank Details</h2>
+    <h3>Note: All columns from Min-Range to Time-Period are EDITABLE</h3>
+    <table id="table">
+      <!--This Part's Code is in the script.js file-->
+    </table>
+    <button type="submit" id="submit_change_button" onclick=" Clicking_submit_change_button(); return false">
+      Submit Changes
+    </button>
+  </div>
+
+</body>
+
+</html>

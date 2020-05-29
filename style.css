@@ -1,0 +1,149 @@
+#main_body {
+    background-color: blueviolet;
+}
+
+#table {
+    border: 4px solid brown;
+}
+
+.header2 {
+    text-align: center;
+    font-size: 200%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+}
+
+#bank_id {
+    margin-top: 10em;
+    margin-left: 3em;
+    font-size: 100%;
+}
+
+#marketplace_id,
+#payment_method,
+#rangekey {
+    margin-top: 10em;
+    margin-left: 2em;
+    font-size: 100%;
+}
+
+#Bank_id_in_form,
+#Marketplace_id_in_form,
+#Payment_method_in_form,
+#Range_key_in_form {
+    background-color: whitesmoke;
+    font-size: 100%;
+}
+
+#Search_button {
+    margin-left: 43%;
+    margin-top: 3em;
+    width: 10em;
+    height: 2em;
+}
+
+#submit_change_button {
+    margin-left: 43%;
+    margin-top: 3em;
+    width: 10em;
+    height: 2em;
+}
+
+.simple_text {
+    font-weight: 600;
+}
+
+#error {
+    color: red;
+    font-size: 200%;
+}
+/*
+th {
+    width: 150px;
+    color: brown;
+    background-color: wheat;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+
+td {
+    width: 150px;
+    color: green;
+    background-color: azure;
+    margin-left: 5px;
+    margin-top: 0px;
+    text-align: center;
+}
+*/
+.normal_header {
+    width: 100px;
+    color: brown;
+    background-color: wheat;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+.metadata_header {
+    width: 400px;
+    color: brown;
+    background-color: wheat;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+.normal_value {
+    width: 100px;
+    height: 100px;
+    color: green;
+    background-color: azure;
+    margin-left: 5px;
+    margin-top: 0px;
+    text-align: center;
+}
+/*
+.metadata_value {
+    width: 400px;
+    height: 100px;
+    color: green;
+    background-color: azure;
+    margin-left: 5px;
+    margin-top: 0px;
+    text-align: center;
+    overflow: scroll;
+}*/
+.metadata_value_div {
+    width: 400px;
+    height: 100px;
+    color: green;
+    background-color: azure;
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    text-align: center;
+    border: 1px solid azure;
+    overflow: scroll;
+}
+
+table {
+    background-color: black;
+}
+
+/*
+.metadata_header {
+    width: 150px;
+    color: brown;
+    background-color: wheat;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+
+.metadata_value {
+    width: 150px;
+    height: 200px;
+    color: green;
+    background-color: azure;
+    margin-left: 5px;
+    margin-top: 0px;
+    overflow: auto;
+}
+*/
