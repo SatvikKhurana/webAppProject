@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edit Bank Details</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.686.0.min.js"></script>
 </head>
 
 <body id="main_body">
@@ -19,10 +20,13 @@
       <span class="simple_text">Bank_id:</span>
       <select id="Bank_id_in_form">
         <option value="None">None</option>
-        <option value="Amex">American Express</option>
-        <option value="Hdfc">HDFC</option>
-        <option value="Sbi">State Bank Of India</option>
-        <option value="Axis">Axis Bank</option>
+        <option value="ICICI">ICICI</option>
+        <option value="ICI">ICI</option>
+        <option value="Icici_Bank_Ltd">ICICI Bank Ltd</option>
+        <option value="AMEX">American Express</option>
+        <option value="HDFC">HDFC</option>
+        <option value="SBI">State Bank Of India</option>
+        <option value="AXIS">Axis Bank</option>
       </select>
     </span>
 
@@ -35,8 +39,16 @@
       <select id="Payment_method_in_form">
         <option value="NONE">None</option>
         <option value="CC">Credit Card</option>
-        <option value="DC">Debit Card</option>
-        <option value="UPI">UPI</option>
+        <option value="NetBanking">Net Banking</option>
+      </select>
+    </span>
+
+    <span id="processor">
+      <span class="simple_text">Processor:</span>
+      <select id="Processor_in_form">
+        <option value="NONE">None</option>
+        <option value="BillDesk">BillDesk</option>
+        <option value="BillDeskDirectExternal">BillDeskDirectExternal</option>
       </select>
     </span>
 
