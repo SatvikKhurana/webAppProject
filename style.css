@@ -16,24 +16,26 @@
 
 #bank_id {
     margin-top: 10em;
-    margin-left: 3em;
-    font-size: 100%;
+    margin-left: 1em;
+    font-size: 90%;
 }
 
 #marketplace_id,
 #payment_method,
-#rangekey {
+#rangekey,
+#processor {
     margin-top: 10em;
     margin-left: 2em;
-    font-size: 100%;
+    font-size: 90%;
 }
 
 #Bank_id_in_form,
 #Marketplace_id_in_form,
 #Payment_method_in_form,
-#Range_key_in_form {
+#Range_key_in_form,
+#Processor_in_form {
     background-color: whitesmoke;
-    font-size: 100%;
+    font-size: 90%;
 }
 
 #Search_button {
@@ -58,24 +60,7 @@
     color: red;
     font-size: 200%;
 }
-/*
-th {
-    width: 150px;
-    color: brown;
-    background-color: wheat;
-    margin-left: 5px;
-    margin-top: 0px;
-}
 
-td {
-    width: 150px;
-    color: green;
-    background-color: azure;
-    margin-left: 5px;
-    margin-top: 0px;
-    text-align: center;
-}
-*/
 .normal_header {
     width: 100px;
     color: brown;
@@ -83,6 +68,7 @@ td {
     margin-left: 5px;
     margin-top: 0px;
 }
+
 .metadata_header {
     width: 400px;
     color: brown;
@@ -90,6 +76,7 @@ td {
     margin-left: 5px;
     margin-top: 0px;
 }
+
 .normal_value {
     width: 100px;
     height: 100px;
@@ -99,17 +86,7 @@ td {
     margin-top: 0px;
     text-align: center;
 }
-/*
-.metadata_value {
-    width: 400px;
-    height: 100px;
-    color: green;
-    background-color: azure;
-    margin-left: 5px;
-    margin-top: 0px;
-    text-align: center;
-    overflow: scroll;
-}*/
+
 .metadata_value_div {
     width: 400px;
     height: 100px;
@@ -127,23 +104,3 @@ td {
 table {
     background-color: black;
 }
-
-/*
-.metadata_header {
-    width: 150px;
-    color: brown;
-    background-color: wheat;
-    margin-left: 5px;
-    margin-top: 0px;
-}
-
-.metadata_value {
-    width: 150px;
-    height: 200px;
-    color: green;
-    background-color: azure;
-    margin-left: 5px;
-    margin-top: 0px;
-    overflow: auto;
-}
-*/
