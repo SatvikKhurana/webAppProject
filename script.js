@@ -1,312 +1,178 @@
 var id_count;
 
-//data starts here
-var arrayOfObjects = [
-  {
-    actionMetadataList: [
-      {
-        type: "Suppress",
-        emailToId: null,
-        subject: null,
-        emailFromId: null,
-        emailBody: null,
-        ticketImpact: null,
-        ticketShortDescription: null,
-        ticketDetails: null,
-        suppressIntervalInMins: null,
-      },
+AWS.config.update({
+  region: 'us-east-1',
+  "endpoint": "http://dynamodb.us-east-1.amazonaws.com",
+  accessKeyId: 'ASIA3DGRPBGGCLOWVHW5',
+  secretAccessKey: '/dkWPhmn/NaWHINWA5yex57pqho5ICMT1PcvTnva',
+  sessionToken: 'FwoGZXIvYXdzEDYaDEAb2lLfW/3SpxwVSiLDAekm1w9k52wqvp7bSiP3gUqhcxZWIQbzAKjTx+7F+fIdy0BFcCN0s3ptaRSHj04JL6W8ZQObqbqBTuPFhOU1DIbrCgE/sZsC09cXEGjCmUt0F0GHbOvpPG2qdhS5JgBc7s1ss0T52eoik7weFlvCUjiBXxwP1V86SpI5J6/kDasWBf583HWC1RFQcas7mNaizsfnekkSJ+wDoKNbKkjw/TjbpTPGea8fZPXEUDFaVYGLsmb3nIo5hxRblC7cpK1eRO2Sjyik1eP2BTItUtqw/Bvv17RhXwTY45N6mTEcGwTMa/NshHtkoPDiHcWn2fm6n+vgVIwnmhfP'
+});
+var ddb = new AWS.DynamoDB({
+  apiVersion: '2012-08-10'
+});
 
-      {
-        type: "Email",
-        emailToId: [
-          "in-auto-suppr-notify@amazon.com",
-          "in-payx-tech@amazon.com",
-          "in-eps-cx@amazon.com",
-        ],
-        subject: "Amex CC (136321 marketplaceId) is suppressed",
-        emailFromId: "in-auto-suppr-dev@amazon.com",
-        emailBody:
-          "Amex - CC for 136321 marketplaceId is suppressed as the ASR is below 50( min transactions limit set is 5 )",
-        ticketImpact: null,
-        ticketShortDescription: null,
-        ticketDetails: null,
-        suppressIntervalInMins: null,
-      },
-    ],
-    bankId: "Amex",
-    createdAt: "2019-12-25T12:38:34.658Z",
-    hashKey: "136321_Amex_CC",
-    isActive: true,
-    marketplaceId: "136321",
-    maxRange: 50,
-    maxTransactions: 2147483647,
-    minRange: 0,
-    minTransactions: 5,
-    paymentMethod: "CC",
-    rangeKey: "0_50",
-    timePeriod: 6,
-    updatedAt: "2019-12-25T12:38:34.658Z",
-  },
-  {
-    actionMetadataList: [
-      {
-        type: "Suppress",
-        emailToId: null,
-        subject: null,
-        emailFromId: null,
-        emailBody: null,
-        ticketImpact: null,
-        ticketShortDescription: null,
-        ticketDetails: null,
-        suppressIntervalInMins: null,
-      },
+function show_error_block_data_not_found() {
+  var error_paragraph = document.getElementById("error");
+  error_paragraph.innerHTML = "Disclaimer: No Entry Found. Check Your Data and Try Again!!!";
+  document.getElementById("area_for_showing_error_message").style.display = "block";
+  document.getElementById("wrapper_around_table").style.display = "none";
+}
 
-      {
-        type: "Email",
-        emailToId: [
-          "in-auto-suppr-notify@amazon.com",
-          "in-payx-tech@amazon.com",
-          "in-eps-cx@amazon.com",
-        ],
-        subject: "Amex CC (136321 marketplaceId) is suppressed",
-        emailFromId: "in-auto-suppr-dev@amazon.com",
-        emailBody:
-          "Amex - CC for 136321 marketplaceId is suppressed as the ASR is below 50( min transactions limit set is 5 )",
-        ticketImpact: null,
-        ticketShortDescription: null,
-        ticketDetails: null,
-        suppressIntervalInMins: null,
-      },
-    ],
-    bankId: "Amex",
-    createdAt: "2019-12-25T12:38:34.658Z",
-    hashKey: "136321_Amex_CC",
-    isActive: true,
-    marketplaceId: "136321",
-    maxRange: 50,
-    maxTransactions: 2147483647,
-    minRange: 2,
-    minTransactions: 5,
-    paymentMethod: "CC",
-    rangeKey: "2_50",
-    timePeriod: 6,
-    updatedAt: "2019-12-25T12:38:34.658Z",
-  },
-  {
-    actionMetadataList: [
-      {
-        type: "Suppress",
-        emailToId: null,
-        subject: null,
-        emailFromId: null,
-        emailBody: null,
-        ticketImpact: null,
-        ticketShortDescription: null,
-        ticketDetails: null,
-        suppressIntervalInMins: null,
-      },
+function show_error_block_other_error() {
+  var error_paragraph = document.getElementById("error");
+  error_paragraph.innerHTML = "Disclaimer: Some Error Occured. Please Try Again!!!";
+  document.getElementById("area_for_showing_error_message").style.display = "block";
+  document.getElementById("wrapper_around_table").style.display = "none";
+}
 
-      {
-        type: "Email",
-        emailToId: [
-          "in-auto-suppr-notify@amazon.com",
-          "in-payx-tech@amazon.com",
-          "in-eps-cx@amazon.com",
-        ],
-        subject: "Amex CC (136321 marketplaceId) is suppressed",
-        emailFromId: "in-auto-suppr-dev@amazon.com",
-        emailBody:
-          "Amex - CC for 136321 marketplaceId is suppressed as the ASR is below 50( min transactions limit set is 5 )",
-        ticketImpact: null,
-        ticketShortDescription: null,
-        ticketDetails: null,
-        suppressIntervalInMins: null,
-      },
-    ],
-    bankId: "Hdfc",
-    createdAt: "2019-12-25T12:38:34.658Z",
-    hashKey: "136321_Hdfc_CC",
-    isActive: true,
-    marketplaceId: "136321",
-    maxRange: 50,
-    maxTransactions: 2147483647,
-    minRange: 0,
-    minTransactions: 5,
-    paymentMethod: "CC",
-    rangeKey: "0_50",
-    timePeriod: 6,
-    updatedAt: "2019-12-25T12:38:34.658Z",
-  },
-];
-//Data Ends Here
+function show_table_header() {
+  table.innerHTML = table.innerHTML +
+    "<tr>" +
+    "<th class='normal_header'><b>HashKey</b></th>" +
+    "<th class='normal_header'><b>Is Active</b></th>" +
+    "<th class='normal_header'><b>Min Range</b></th>" +
+    "<th class='normal_header'><b>Max Range</b></th>" +
+    "<th class='normal_header'><b>Min Transaction</b></th>" +
+    "<th class='normal_header'><b>Time Period</b></th>" +
+    "<th class='normal_header'><b>Issuer</b></th>" +
+    "<th class='metadata_header'><b>Active Meta Data List</b></th></tr>";
+
+  document.getElementById("wrapper_around_table").style.display = "block";
+}
+
+function show_table_structure_and_value(current_object) {
+
+  table.innerHTML =
+    table.innerHTML +
+    "<tr id='dataEntry" +
+    id_count +
+    "'><td class='normal_value'>" +
+    current_object["hashKey (S)"] +
+    "</td><td style='display:none;'>" +
+    current_object["rangeKey (S)"] +
+    "</td><td style='display:none;'>" +
+    current_object["createdAt (S)"] +
+    "</td><td class='normal_value'>" +
+    current_object["isActive (BOOL)"] +
+    "</td><td contenteditable='true' class='normal_value'>" +
+    current_object["minRange (N)"] +
+    "</td><td contenteditable='true' class='normal_value'>" +
+    current_object["maxRange (N)"] +
+    "</td><td contenteditable='true' class='normal_value'>" +
+    current_object["minTransactions (N)"] +
+    "</td><td contenteditable='true' class='normal_value'>" +
+    current_object["timePeriod (N)"] +
+    "</td><td class='normal_value'>" +
+    current_object["issuer (S)"] +
+    "</td><td>" +
+    "<div class='metadata_value_div' >" +
+    current_object["actionMetadataList (S)"] +
+    "</div></td>" +
+    "</tr>";
+
+  console.log(current_object);
+  id_count = id_count + 1;
+}
+
+function show_Items_In_Table_With_Range_Key(data) {
+  if (data['Responses']['BankDetails'].length == 0) {
+    show_error_block_data_not_found();
+    return;
+  }
+  console.log("Success");
+  show_table_header();
+  for (var i = 0; i < data['Responses']['BankDetails'].length; i = i + 1) {
+    var current_object = AWS.DynamoDB.Converter.unmarshall(data['Responses']['BankDetails'][i]);
+    show_table_structure_and_value(current_object);
+  }
+}
+
+function show_Items_In_Table_Without_Range_Key(data) {
+  if (data['Items'].length == 0) {
+    show_error_block_data_not_found();
+    return;
+  }
+  console.log("Success");
+  show_table_header();
+  for (var i = 0; i < data['Items'].length; i++) {
+    var current_object = AWS.DynamoDB.Converter.unmarshall(data['Items'][i]);
+    show_table_structure_and_value(current_object);
+  }
+}
+
 
 function Clicking_search_button() {
-  document.getElementById("area_for_showing_error_message").style.display =
-    "none";
+
+  document.getElementById("area_for_showing_error_message").style.display = "none";
   document.getElementById("wrapper_around_table").style.display = "block";
 
   var hashkey;
-  var form = document.getElementById("form");
-  var bank_id_in_form = document.getElementById("Bank_id_in_form");
-  var marketplace_id_in_form = document.getElementById(
-    "Marketplace_id_in_form"
-  );
-  var payment_method_in_form = document.getElementById(
-    "Payment_method_in_form"
-  );
-  var range_key_in_form = document.getElementById("Range_key_in_form");
-
-  var entryFound = false;
+  var rangekey;
+  let entryFound = false;
   id_count = 1;
+
+  var bank_id_in_form = document.getElementById("Bank_id_in_form");
+  var marketplace_id_in_form = document.getElementById("Marketplace_id_in_form");
+  var payment_method_in_form = document.getElementById("Payment_method_in_form");
+  var processor_in_form = document.getElementById("Processor_in_form");
+  var range_key_in_form = document.getElementById("Range_key_in_form");
   var table = document.getElementById("table");
   table.innerHTML = "";
-  hashkey =
-    marketplace_id_in_form.value +
-    "_" +
-    bank_id_in_form.options[bank_id_in_form.selectedIndex].value +
-    "_" +
+
+  hashkey = marketplace_id_in_form.value + "_" +
+    bank_id_in_form.options[bank_id_in_form.selectedIndex].value + "_" +
+    processor_in_form.options[processor_in_form.selectedIndex].value + "_" +
     payment_method_in_form.options[payment_method_in_form.selectedIndex].value;
+  rangekey = range_key_in_form.value;
 
-  if (range_key_in_form.value === "") {
-    table.innerHTML =
-      table.innerHTML +
-      "<tr>" +
-      "<th class='normal_header'><b>HashKey</b></th>" +
-      "<th class='normal_header'><b>Is Active</b></th>" +
-      "<th class='normal_header'><b>Min Range</b></th>" +
-      "<th class='normal_header'><b>Min Transaction</b></th>" +
-      "<th class='normal_header'><b>Max Range</b></th>" +
-      "<th class='normal_header'><b>Max Transaction</b></th>" +
-      "<th class='normal_header'><b>Time Period</b></th>" +
-      "<th class='normal_header'><b>Last Updated</b></th>" +
-      "<th class='metadata_header'><b>Meta Data</b></th></tr>";
-
-    document.getElementById("wrapper_around_table").style = "block";
-    for (let i = 0; i < arrayOfObjects.length; i = i + 1) {
-      if (arrayOfObjects[i]["hashKey"] === hashkey) {
-        var current_object = arrayOfObjects[i];
-        var metadata_string = "";
-
-        for (let j = 0; j < current_object["actionMetadataList"].length; j++) {
-          var subobject = current_object["actionMetadataList"][j];
-          metadata_string = metadata_string + "{\n";
-          for (const key in subobject) {
-            if (subobject.hasOwnProperty(key)) {
-              const element = subobject[key];
-              metadata_string =
-                metadata_string + '"' + key + '":' + '"' + element + '",\n';
-            }
-          }
-          metadata_string = metadata_string + "},\n";
+  if (rangekey === "") {
+    var params = {
+      TableName: 'BankDetails',
+      KeyConditionExpression: "#hk = :v1",
+      ExpressionAttributeNames: {
+        "#hk": "hashKey (S)"
+      },
+      ExpressionAttributeValues: {
+        ":v1": {
+          S: hashkey
         }
-        table.innerHTML =
-          table.innerHTML +
-          "<tr id='dataEntry" +
-          id_count +
-          "'><td class='normal_value'>" +
-          current_object["hashKey"] +
-          "</td><td class='normal_value'>" +
-          current_object["isActive"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["minRange"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["minTransactions"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["maxRange"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["maxTransactions"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["timePeriod"] +
-          "</td><td class='normal_value'>" +
-          current_object["updatedAt"] +
-          "</td><td style='display:none;'>" +
-          current_object["rangeKey"] +
-          "</td><td>" +
-          "<div class='metadata_value_div' >" +
-          metadata_string +
-          "</div></td>" +
-          "</tr>";
-        //not using JSON.stringify to the activeMetaDataList because it is causing some display problems
-        entryFound = true;
-        id_count++;
       }
-    }
+    };
+    ddb.query(params, function (err, data) {
+      if (err) {
+        console.log(err, err.stack);
+        show_error_block_other_error();
+      } else {
+        entryFound = true;
+        show_Items_In_Table_Without_Range_Key(data);
+      }
+    });
   } else {
-    table.innerHTML =
-      table.innerHTML +
-      "<tr>" +
-      "<th class='normal_header'><b>HashKey</b></th>" +
-      "<th class='normal_header'><b>Is Active</b></th>" +
-      "<th class='normal_header'><b>Min Range</b></th>" +
-      "<th class='normal_header'><b>Min Transaction</b></th>" +
-      "<th class='normal_header'><b>Max Range</b></th>" +
-      "<th class='normal_header'><b>Max Transaction</b></th>" +
-      "<th class='normal_header'><b>Time Period</b></th>" +
-      "<th class='normal_header'><b>Last Updated</b></th>" +
-      "<th class='metadata_header'><b>Meta Data</b></th></tr>";
-    document.getElementById("wrapper_around_table").style = "block";
-    //range_key given, so unique tuple
-    for (let i = 0; i < arrayOfObjects.length; i = i + 1) {
-      if (
-        arrayOfObjects[i]["hashKey"] == hashkey &&
-        arrayOfObjects[i]["rangeKey"] === range_key_in_form.value
-      ) {
-        var current_object = arrayOfObjects[i];
-        var metadata_string = "";
-
-        for (let j = 0; j < current_object["actionMetadataList"].length; j++) {
-          var subobject = current_object["actionMetadataList"][j];
-          metadata_string = metadata_string + "{\n";
-          for (const key in subobject) {
-            if (subobject.hasOwnProperty(key)) {
-              const element = subobject[key];
-              metadata_string =
-                metadata_string + '"' + key + '":' + '"' + element + '",\n';
+    var params = {
+      RequestItems: {
+        'BankDetails': {
+          Keys: [{
+            "hashKey (S)": {
+              S: hashkey
+            },
+            "rangeKey (S)": {
+              S: rangekey
             }
-          }
-          metadata_string = metadata_string + "},\n";
+          }]
         }
-        table.innerHTML =
-          table.innerHTML +
-          "<tr id='dataEntry" +
-          id_count +
-          "'><td class='normal_value'>" +
-          current_object["hashKey"] +
-          "</td><td class='normal_value'>" +
-          current_object["isActive"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["minRange"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["minTransactions"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["maxRange"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["maxTransactions"] +
-          "</td><td contenteditable='true' class='normal_value'>" +
-          current_object["timePeriod"] +
-          "</td><td class='normal_value'>" +
-          current_object["updatedAt"] +
-          "</td><td style='display:none;'>" +
-          current_object["rangeKey"] +
-          "</td><td>" +
-          "<div class='metadata_value_div' >" +
-          JSON.stringify(current_object["actionMetadataList"]) +
-          "</div></td>" +
-          "</tr>";
-        entryFound = true;
-        id_count++;
       }
-    }
+    };
+    ddb.batchGetItem(params, function (err, data) {
+      if (err) {
+        console.log("Error", err);
+        show_error_block_other_error();
+      } else {
+        entryFound = true;
+        show_Items_In_Table_With_Range_Key(data);
+      }
+    });
   }
 
-  if (entryFound == false) {
-    var error_paragraph = document.getElementById("error");
-    error_paragraph.innerHTML =
-      "Disclaimer: No Entry Found. Check Your Data and Try Again!!!";
-    document.getElementById("area_for_showing_error_message").style.display =
-      "block";
-    document.getElementById("wrapper_around_table").style.display = "none";
-  }
 }
 
 function Clicking_submit_change_button() {
@@ -315,22 +181,100 @@ function Clicking_submit_change_button() {
     var rowEntry = document.getElementById(entryId);
     var cellsInCurrentRow = rowEntry.getElementsByTagName("td");
     var hashKeyValue = cellsInCurrentRow[0].innerText;
-    var rangeKeyValue = cellsInCurrentRow[8].innerText;
-    var time = Date();
-    for (let j = 0; j < arrayOfObjects.length; j = j + 1) {
-      if (
-        arrayOfObjects[j]["hashKey"] == hashKeyValue &&
-        arrayOfObjects[j]["rangeKey"] == rangeKeyValue
-      ) {
-        arrayOfObjects[j]["minRange"] = cellsInCurrentRow[2].innerText;
-        arrayOfObjects[j]["minTransactions"] = cellsInCurrentRow[3].innerText;
-        arrayOfObjects[j]["maxRange"] = cellsInCurrentRow[4].innerText;
-        arrayOfObjects[j]["maxTransactions"] = cellsInCurrentRow[5].innerText;
-        arrayOfObjects[j]["timeLimit"] = cellsInCurrentRow[6].innerText;
-        arrayOfObjects[j]["updatedAt"] = time;
-        arrayOfObjects[j]["rangeKey"] =
-          arrayOfObjects[j]["minRange"] + "_" + arrayOfObjects[j]["maxRange"];
+    var rangeKeyValue = cellsInCurrentRow[1].innerText;
+
+    var params = {
+      TableName: "BankDetails",
+      Key: {
+        "hashKey (S)": {
+          S: hashKeyValue
+        },
+        "rangeKey (S)": {
+          S: rangeKeyValue
+        }
       }
-    }
+    };
+    ddb.deleteItem(params, function (err, data) {
+      if (err) console.log(err, err.stack);
+      else console.log(data);
+    });
+
+    var array = hashKeyValue.split("_");
+
+    var marketplaceIdValue = array[0];
+    var bankIdValue = array[1];
+    var processorValue = array[2];
+    var paymentMethodValue = array[3];
+    var createdAtValue = cellsInCurrentRow[2].innerText;
+    var isActiveValue;
+    if (cellsInCurrentRow[3].innerHTML == true) isActiveValue = true;
+    else isActiveValue = false;
+    var minRangeValue = '' + Number(cellsInCurrentRow[4].innerText);
+    var maxRangeValue = '' + Number(cellsInCurrentRow[5].innerText);
+    var minTransactionsValue = '' + Number(cellsInCurrentRow[6].innerText);
+    var timePeriodValue = '' + Number(cellsInCurrentRow[7].innerText);
+    var issuerValue = cellsInCurrentRow[8].innerText;
+    var metadataValue = cellsInCurrentRow[9].innerText;
+    var currentDate = new Date();
+    var updatedAtValue = currentDate.toJSON();
+
+    rangeKeyValue = minRangeValue + "_" + maxRangeValue;
+    var parameter = {
+      Item: {
+        "hashKey (S)": {
+          S: hashKeyValue
+        },
+        "rangeKey (S)": {
+          S: rangeKeyValue
+        },
+        "actionMetadataList (S)": {
+          S: metadataValue
+        },
+        "bankId (S)": {
+          S: bankIdValue
+        },
+        "createdAt (S)": {
+          S: createdAtValue
+        },
+        "isActive (BOOL)": {
+          BOOL: isActiveValue
+        },
+        "marketplaceId (S)": {
+          N: marketplaceIdValue
+        },
+        "maxRange (N)": {
+          N: maxRangeValue
+        },
+        "minRange (N)": {
+          N: minRangeValue
+        },
+        "minTransactions (N)": {
+          N: minTransactionsValue
+        },
+        "paymentMethod (S)": {
+          S: paymentMethodValue
+        },
+        "processor (S)": {
+          S: processorValue
+        },
+        "timePeriod (N)": {
+          N: timePeriodValue
+        },
+        "updatedAt (S)": {
+          S: updatedAtValue
+        },
+        "issuer (S)": {
+          S: issuerValue
+        }
+      },
+      TableName: "BankDetails",
+      ReturnConsumedCapacity: "TOTAL"
+    };
+
+    ddb.putItem(parameter, function (err, data) {
+      if (err) console.log(err, err.stack);
+      else console.log("success", data);
+    });
+
   }
 }
